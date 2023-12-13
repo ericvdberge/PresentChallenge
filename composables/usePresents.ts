@@ -9,17 +9,19 @@ export const usePresents = (): UsePresent => {
         //generate random number of child presents
         let numberOfInnnerPresents: number = Math.floor(Math.random() * 3)
 
-        //remove the opened present
+        //get the opened present
         const parentPresent: Present = presents.value[idx]
-        presents.value = presents.value.filter((_, pidx) => pidx !== idx)
 
         //add the new child presents
-        for(let i = 0; i < numberOfInnnerPresents; i++) {
-            presents.value.splice(idx, 0, {
-                //scale down only to a certain size and then stop
-                scale: parentPresent.scale > 0.4 ? (parentPresent!.scale) * 0.5 : 0,
-            } as Present)
-        }
+        presents.value = [
+            //add existing presents without the opened present
+            ...presents.value.filter((_, pidx) => pidx !== idx),
+             
+            //add the child presents to the array
+            ...new Array<Present>(numberOfInnnerPresents).fill({ 
+                scale: parentPresent.scale > 0.4 ? (parentPresent!.scale) * 0.5 : 0 
+            })
+        ]
     }
     
     return {
