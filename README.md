@@ -79,4 +79,4 @@ To run my present challenge in docker, follow the next steps:
 3. navigate to the directory locally
 4. open the command prompt
 5. use the command `docker build -t present-challenge .`
-6. use the command `docker run -it -d -p 8080:80 present-challenge`
+6. use the command `docker run -it -d --name present-challenge -p 8080:80 present-challenge`
